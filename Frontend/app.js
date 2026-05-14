@@ -139,6 +139,8 @@ async function captureAndPredict() {
         lastLetter = ""; holdCount = 0; lastAdded = "";
       }
 
+      document.getElementById("statusText").textContent = "Detectando";
+      
     } catch(e) {
       document.getElementById("statusText").textContent = "Error conectando con API";
     }
