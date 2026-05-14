@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SignBridge — ASL Detector</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;500;600;700&family=Nunito+Sans:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+
+  <!-- MediaPipe Hands -->
+  <script src="https://cdn.jsdelivr.net/npm/@mediapipe/hands/hands.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@mediapipe/drawing_utils/drawing_utils.js" crossorigin="anonymous"></script>
+</head>
+<body>
+
+  <header>
+    <div class="logo">
+      <div class="logo-icon">SB</div>
+      <div class="logo-text">Sign<span>Bridge</span></div>
+    </div>
+    <div class="badge">Azure Custom Vision</div>
+  </header>
+
+  <main>
+    <!-- Camera -->
+    <div class="camera-section">
+      <div class="video-frame">
+        <video id="video" autoplay playsinline muted></video>
+        <canvas id="overlay"></canvas>
+        <div class="status-pill" id="statusPill">
+          <div class="status-dot"></div>
+          <span id="statusText">Cámara inactiva</span>
+        </div>
+        <div class="hand-badge" id="handBadge">Sin mano detectada</div>
+      </div>
+      <div class="cam-controls">
+        <button class="btn btn-primary" id="btnStart" onclick="startDetection()">Iniciar detección</button>
+        <button class="btn btn-secondary" id="btnStop" onclick="stopDetection()">Detener</button>
+      </div>
+    </div>
+
+    <!-- Panel -->
+    <div class="right-panel">
+
+      <div class="card">
+        <div class="card-label">Letra detectada</div>
+        <div class="letter-row">
+          <div class="letter-bubble empty" id="letterBubble">—</div>
+          <div class="letter-meta">
+            <div class="conf-label">Confianza</div>
+            <div class="conf-bar-bg">
+              <div class="conf-bar-fill" id="confFill"></div>
+            </div>
+            <div class="conf-value" id="confValue">—</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-label">Escribiendo</div>
+        <div class="word-display" id="wordDisplay"><span class="cursor"></span></div>
+      </div>
+
+      <div class="card">
+        <div class="card-label">Oración</div>
+        <div class="sentence-display" id="sentenceDisplay">Las palabras aparecerán aquí...</div>
+      </div>
+
+      <div class="card" style="padding:14px">
+        <div class="text-controls">
+          <button class="btn-ctrl" onclick="addSpace()">␣ Espacio</button>
+          <button class="btn-ctrl danger" onclick="deleteLast()">⌫ Borrar</button>
+          <button class="btn-ctrl danger" onclick="clearAll()">✕ Limpiar</button>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <footer>
+    <span>SignBridge · American Sign Language (ASL)</span>
+    <span>Powered by <strong>Azure Custom Vision</strong> + <strong>MediaPipe</strong></span>
+  </footer>
+
+  <canvas id="capture" style="display:none"></canvas>
+  <script src="app.js"></script>
+</body>
+</html>

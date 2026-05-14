@@ -1,0 +1,18 @@
+# Dataset - demasiado pesado para GitHub
+Dataset/
+
+# Scripts utilitarios
+prepare_dataset.py
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.env
+*.egg-info/
+
+# VS Code
+
+# Variables de entorno (keys secretas)
+local.settings.json
+.env.local
